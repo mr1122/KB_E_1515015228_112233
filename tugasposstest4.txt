@@ -1,0 +1,47 @@
+Nama 	: Rizwan Fahrony
+NIM 	: 1515015228
+Kelas 	: E'2015
+Ket 	: Pindah Sementara
+
+1. Analisis Program langkah-langkahnya
+
+	setelah eksekusi GOAL dijalanakan maka Prolog akan memulai pelacakan dari fakta CLAUSES pertama yaitu data orang-orang yang terlibat dalam kasus pembunuhan, dan korban pembunuhan yaitu siti yang dibunuh dengan pentungan. Serta data-data orang yang berselingkuh. Sehigga visual prolog akan memulai dengan memberikan titik awal pada clauses pembunuh (Pembunuh ).
+Dari fakta ini argument X akan diikat dengan argument Pembunuh. Dari fakta pembunuh ini terdapat penyataan syarat dan prolog akan melakukan unifikasi terhadap pernyataan syarat-syarat tersebut. Pernyataan syarat pertama orang ( Pembunuh,_,_ ). Prolog akan memanggil fakta orang untuk mengetahui pembunuh. Fakta pertama yang di dapat adalah budi.
+Selanjutnya prolog akan memanggil fakta terbunuh dan didapat faktanya adalah siti.
+kemudian prolog akan mencari fakta dari dicurigai(X), dari fakta ini kemudian akan dilakukan proses pencarian pernyataan bersyarat dan sekali lagi prolog akan melakukan unifikasi terhadap pernyataan syarat-syarat tersebut. Pernyataan syarat pertama terbunuh_dengan ( siti, Senjata ). Prolog akan memanggil fakta terbunuh_dengan untuk mengetahui senjata yang dipakai. Fakta yang di dapat adalah terbunuh_dengan( siti, pentungan ).
+kemudian prolog akan mencari fakta dari benda yang cara kerjanya mirip senjata dari pernyataan bersyarat cara_kerja_mirip(Benda, Senjata). Lalu prolog akan memanggil fakta cara_kerja _mirip untuk mengetahui benda apa yang cara kerjanya mirip pentungan. Fakta yang didapat adalah cara_kerja_mirip(kaki_palsu, pentungan).
+kemudian prolog akan mencari fakta dari kemungkinan_milik(X, Benda). Pada fakta ini ternyata ditemukan pernyataan bersyarat lagi yaitu pernyataan milik(X, Benda). Dari pernyataan ini akan dicari fakta bahwa siapa pemilik kaki palsu dan didapatkan fakta bahwa milik(budi, kaki_palsu).
+setelah itu prolog kembali memeriksa fakta dari pembunuh karena masih ada pernyataan bersyarat yang belum diperiksa yaitu fakta ternodai(Pembunuh, Zat). Lalu prolog akan memanggil fakta ternodai untuk melihat zat apa yang menodai budi, dan didapat fakta bahwa ternodai(budi, darah).
+setelah itu prolog akan memeriksa fakta terakhir yaitu ternodai(Terbunuh, Zat) dan didapat fakta bahwa ternodai(siti, darah). Dari fakta ini ditemukan bahwa siti mempunyai noda yang sama dengan budi.
+berdasarkan kecocokan dari fakta-fakta diatas dari awal hingga akhir, sehingga prolog menetapkan bahwa pembunuh siti adalah budi.
+
+2. Buat program dengan menggunakan metode cut/fail ditambah dengan metode not
+
+DOMAINS
+nama = symbol
+ipk = real
+
+PREDICATES
+mahasiswa_teladan
+nondeterm mahasiswa(nama, ipk)
+masa_percobaan(nama)
+
+CLAUSES
+mahasiswa_teladan:-
+mahasiswa(Nama, IPK),
+IPK>=3.5,
+not(masa_percobaan(Nama)),
+write(Nama," adalah mahasiswa teladan ","\n"),
+fail.
+mahasiswa_teladan.
+
+mahasiswa("Vina Panduwinata", 3.5).
+mahasiswa("Helmi Yahya", 2.0).
+mahasiswa("Syahrul Gunawan", 3.7).
+mahasiswa("Rizwan Fahrony", 4.0).
+
+masa_percobaan("Vina Panduwinata").
+masa_percobaan("Helmi Yahya").
+
+GOAL
+mahasiswa_teladan.
